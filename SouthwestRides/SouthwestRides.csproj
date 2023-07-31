@@ -11,6 +11,22 @@
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="7.0.9" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.5.0" />
+    <PackageReference Include="MongoDB.Bson" Version="2.20.0" />
+    <PackageReference Include="MongoDB.Driver" Version="2.20.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Remove="Controllers\" />
+    <None Remove="Models\Ride" />
+    <None Remove="Middleware\" />
+    <None Remove="Data\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Controllers\" />
+    <Folder Include="Middleware\" />
+    <Folder Include="Data\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Models\Ride.cs" />
+  </ItemGroup>
 </Project>
