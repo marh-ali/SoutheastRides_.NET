@@ -1,5 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
-using SouthwestRides.Models;
+using SoutheastRides.Models;
 
 [ApiController]
 [Route("[controller]")]

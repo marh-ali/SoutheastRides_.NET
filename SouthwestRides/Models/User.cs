@@ -2,7 +2,7 @@ using System;
 using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
 
-namespace SouthwestRides.Models
+namespace SoutheastRides.Models
 {
     public class User
     {

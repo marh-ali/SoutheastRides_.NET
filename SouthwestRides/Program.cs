@@ -5,9 +5,9 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 var settings = builder.Configuration.GetSection("Settings")
-    .Get<SouthwestRidesDatabaseSettings>();
+    .Get<SoutheastRidesDatabaseSettings>();
 
-builder.Services.AddSingleton<ISouthwestRidesDatabaseSettings>(settings);
+builder.Services.AddSingleton<ISoutheastRidesDatabaseSettings>(settings);
 
 var client = new MongoClient(settings.ConnectionString);
 var database = client.GetDatabase(settings.DatabaseName);

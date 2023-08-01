@@ -1,14 +1,14 @@
 ﻿using BikeApp.Models;
 using Microsoft.Extensions.Options;
 using MongoDB.Driver;
-using SouthwestRides.Models;
+using SoutheastRides.Models;
 
-public class SouthwestRidesContext
+public class SoutheastRidesContext
 {
     private readonly IMongoDatabase _database = null;
 
 
-    public SouthwestRidesContext(MongoClient client, string databaseName)
+    public SoutheastRidesContext(MongoClient client, string databaseName)
     {
         _database = client.GetDatabase(databaseName);
     }

@@ -1,4 +1,4 @@
-﻿public interface ISouthwestRidesDatabaseSettings
+﻿public interface ISoutheastRidesDatabaseSettings
 {
     string ConnectionString { get; set; }
     string DatabaseName { get; set; }

@@ -1,4 +1,4 @@
-﻿public class SouthwestRidesDatabaseSettings : ISouthwestRidesDatabaseSettings
+﻿public class SoutheastRidesDatabaseSettings : ISoutheastRidesDatabaseSettings
 {
     public string ConnectionString { get; set; }
     public string DatabaseName { get; set; }

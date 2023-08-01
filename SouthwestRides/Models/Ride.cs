@@ -1,8 +1,7 @@
-using System;
 using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
 
-namespace BikeApp.Models
+namespace SoutheastRides.Models
 {
     public class Ride
     {

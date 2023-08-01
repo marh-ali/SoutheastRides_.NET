@@ -1,4 +1,4 @@
-﻿using SouthwestRides.Models;
+﻿using SoutheastRides.Models;
 
 public interface IUserService
 {

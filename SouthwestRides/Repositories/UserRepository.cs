@@ -1,11 +1,11 @@
 using MongoDB.Driver;
-using SouthwestRides.Models;
+using SoutheastRides.Models;
 
 public class UserRepository : IUserRepository
 {
     private readonly IMongoCollection<User> _users;
 
-    public UserRepository(ISouthwestRidesDatabaseSettings settings)
+    public UserRepository(ISoutheastRidesDatabaseSettings settings)
     {
         var client = new MongoClient(settings.ConnectionString);
         var database = client.GetDatabase(settings.DatabaseName);
