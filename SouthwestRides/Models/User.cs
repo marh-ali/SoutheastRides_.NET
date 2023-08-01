@@ -8,22 +8,33 @@ namespace SouthwestRides.Models
     {
         [BsonId]
         [BsonRepresentation(BsonType.ObjectId)]
-        public string Id { get; set; }
+        public string? Id { get; set; }
 
-        [BsonElement("Name")]
-        public string Name { get; set; }
+        [BsonElement("Username")]
+        [BsonRequired]
+        public string Username { get; set; }
 
         [BsonElement("Email")]
-        public string Email { get; set; }
+        public string? Email { get; set; }
 
         [BsonElement("ProfilePictureUrl")]
-        public string ProfilePictureUrl { get; set; }
+        public string? ProfilePictureUrl { get; set; }
 
-        // We're keeping these properties to identify the user based on Firebase Auth info
         [BsonElement("AuthProvider")]
+        [BsonRequired]
         public string AuthProvider { get; set; }
 
         [BsonElement("AuthProviderId")]
+        [BsonRequired]
         public string AuthProviderId { get; set; }
+
+        [BsonElement("Bio")]
+        public string? Bio { get; set; }
+
+        [BsonElement("RideHistory")]
+        public string[]? RideHistory { get; set; }
+
+        [BsonElement("FavoriteRoutes")]
+        public string[]? FavoriteRoutes { get; set; }
     }
 }
