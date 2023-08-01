@@ -5,14 +5,12 @@ public class UserRepository : IUserRepository
 {
     private readonly IMongoCollection<User> _users;
 
-    public UserRepository(ISoutheastRidesDatabaseSettings settings)
+    public UserRepository(SoutheastRidesContext context)
     {
-        var client = new MongoClient(settings.ConnectionString);
-        var database = client.GetDatabase(settings.DatabaseName);
-        _users = database.GetCollection<User>(settings.UserCollectionName);
+        _users = context.Users;
     }
 
-    public async Task<IEnumerable<User>> Get() =>
+public async Task<IEnumerable<User>> Get() =>
         await _users.Find(user => true).ToListAsync();
 
     public async Task<User> Get(string id) =>

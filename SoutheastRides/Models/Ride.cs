@@ -1,27 +1,44 @@
 using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
+using System.ComponentModel.DataAnnotations;
 
-namespace SoutheastRides.Models
+public class Ride
 {
-    public class Ride
-    {
-        [BsonId]
-        [BsonRepresentation(BsonType.ObjectId)]
-        public string Id { get; set; }
+    [BsonId]
+    [BsonRepresentation(BsonType.ObjectId)]
+    public string? Id { get; set; }
 
-        [BsonElement("StartLocation")]
-        public string StartLocation { get; set; }
+    [BsonElement("CreatorId")]
+    [Required]
+    public string CreatorId { get; set; } 
 
-        [BsonElement("EndLocation")]
-        public string EndLocation { get; set; }
+    [BsonElement("Title")]
+    [Required]
+    public string Title { get; set; }
 
-        [BsonElement("StartTime")]
-        public DateTime StartTime { get; set; }
+    [BsonElement("Description")]
+    public string? Description { get; set; } // Additional details about the ride
 
-        [BsonElement("Creator")]
-        public string Creator { get; set; }
+    [BsonElement("StartLocation")]
+    public string[] StartLocation { get; set; } // Start location coordinates
 
-        [BsonElement("Map")]
-        public string Map { get; set; }
-    }
+    [BsonElement("EndLocation")]
+    public string[] EndLocation { get; set; } // End location coordinates
+
+    [BsonElement("StartTime")]
+    [Required]
+    public DateTime StartTime { get; set; } // Start time of the ride
+
+    [BsonElement("EndTime")]
+    public DateTime? EndTime { get; set; } // Optional end time of the ride
+
+    [BsonElement("Distance")]
+    public int Distance { get; set; } // Distance in meters
+
+    [BsonElement("MaxParticipants")]
+    public int? MaxParticipants { get; set; } // Optional limit on participants
+
+    [BsonElement("Status")]
+    [Required]
+    public string Status { get; set; } // Status of the ride (Scheduled, Ongoing, Completed, Cancelled)
 }

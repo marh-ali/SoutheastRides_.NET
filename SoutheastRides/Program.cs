@@ -13,9 +13,14 @@ var client = new MongoClient(settings.ConnectionString);
 var database = client.GetDatabase(settings.DatabaseName);
 
 builder.Services.AddSingleton<IMongoDatabase>(database);
+builder.Services.AddScoped(sp =>
+    new SoutheastRidesContext(new MongoClient(settings.ConnectionString), settings.DatabaseName));
 
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<IUserService, UserService>();
+
+builder.Services.AddScoped<IRideRepository, RideRepository>();
+builder.Services.AddScoped<IRideService, RideService>();
 
 builder.Services.AddControllers();
 
