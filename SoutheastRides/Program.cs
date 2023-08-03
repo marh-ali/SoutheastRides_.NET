@@ -1,5 +1,5 @@
 ﻿using MongoDB.Driver;
-
+using SoutheastRides.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -21,6 +21,9 @@ builder.Services.AddScoped<IUserService, UserService>();
 
 builder.Services.AddScoped<IRideRepository, RideRepository>();
 builder.Services.AddScoped<IRideService, RideService>();
+
+builder.Services.AddScoped<IRsvpRepository, RsvpRepository>();
+builder.Services.AddScoped<IRsvpService, RsvpService>();
 
 builder.Services.AddControllers();
 

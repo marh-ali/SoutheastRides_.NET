@@ -1,7 +1,6 @@
-﻿using BikeApp.Models;
+﻿using SoutheastRides.Models;
 using Microsoft.Extensions.Options;
 using MongoDB.Driver;
-using SoutheastRides.Models;
 
 public class SoutheastRidesContext
 {

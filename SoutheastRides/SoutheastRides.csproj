@@ -22,6 +22,7 @@
     <None Remove="Repositories\" />
     <None Remove="Repositories\Interfaces\" />
     <None Remove="Services\Interfaces\" />
+    <None Remove="DTO\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Controllers\" />
@@ -29,6 +30,7 @@
     <Folder Include="Repositories\" />
     <Folder Include="Repositories\Interfaces\" />
     <Folder Include="Services\Interfaces\" />
+    <Folder Include="DTO\" />
   </ItemGroup>
   <ItemGroup>
     <None Update="appsettings.json">
