@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
+using SoutheastRides.DTO;
 using SoutheastRides.Models;
 using System;
 using System.Threading.Tasks;
@@ -52,13 +53,42 @@ public class RideController : ControllerBase
     }
 
     [HttpPut("{id:length(24)}")]
-    public async Task<IActionResult> UpdateRide(string id, Ride updatedRide)
+    public async Task<IActionResult> UpdateRide(string id, [FromBody] RideUpdateDTO updatedRideDTO)
     {
         try
         {
-            if (await _rideService.GetRide(id) == null)
+            var existingRide = await _rideService.GetRide(id);
+
+            if (existingRide == null)
                 return NotFound(new { message = "Ride not found, unable to update" });
-            await _rideService.UpdateRide(id, updatedRide);
+
+            // Only update the properties that are present in the DTO
+            if (updatedRideDTO.Title != null)
+                existingRide.Title = updatedRideDTO.Title;
+
+            if (updatedRideDTO.Description != null)
+                existingRide.Description = updatedRideDTO.Description;
+
+            if (updatedRideDTO.StartLocation != null)
+                existingRide.StartLocation = updatedRideDTO.StartLocation;
+
+            if (updatedRideDTO.EndLocation != null)
+                existingRide.EndLocation = updatedRideDTO.EndLocation;
+
+            if (updatedRideDTO.StartTime.HasValue)
+                existingRide.StartTime = updatedRideDTO.StartTime.Value;
+
+            if (updatedRideDTO.EndTime.HasValue)
+                existingRide.EndTime = updatedRideDTO.EndTime.Value;
+
+            if (updatedRideDTO.MaxParticipants.HasValue)
+                existingRide.MaxParticipants = updatedRideDTO.MaxParticipants.Value;
+
+            if (updatedRideDTO.Status != null)
+                existingRide.Status = updatedRideDTO.Status;
+
+            await _rideService.UpdateRide(id, existingRide);
+
             return NoContent();
         }
         catch (Exception ex)
@@ -66,6 +96,7 @@ public class RideController : ControllerBase
             return BadRequest(new { error = $"An error occurred while updating the ride: {ex.Message}" });
         }
     }
+
 
     [HttpDelete("{id:length(24)}")]
     public async Task<IActionResult> DeleteRide(string id)

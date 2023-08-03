@@ -10,7 +10,7 @@ public class Ride
 
     [BsonElement("CreatorId")]
     [Required]
-    public string CreatorId { get; set; } 
+    public string CreatorId { get; set; }
 
     [BsonElement("Title")]
     [Required]
@@ -20,6 +20,7 @@ public class Ride
     public string? Description { get; set; } // Additional details about the ride
 
     [BsonElement("StartLocation")]
+    [BsonRequired]
     public string[] StartLocation { get; set; } // Start location coordinates
 
     [BsonElement("EndLocation")]

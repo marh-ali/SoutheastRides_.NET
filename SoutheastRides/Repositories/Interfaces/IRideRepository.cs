@@ -1,4 +1,6 @@
-﻿public interface IRideRepository
+﻿using SoutheastRides.Models;
+
+public interface IRideRepository
 {
     Task<IEnumerable<Ride>> GetAll();
     Task<Ride> Get(string id);
