@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
+using SoutheastRides.DTO;
 using SoutheastRides.Models;
 
 [ApiController]
@@ -42,13 +43,25 @@ public class UserController : ControllerBase
     }
 
     [HttpPut("{id:length(24)}")]
-    public async Task<IActionResult> UpdateUser(string id, User updatedUser)
+    public async Task<IActionResult> UpdateUser(string id, [FromBody] UpdateUserDTO updatedUserDTO)
     {
         try
         {
-            if (await _userService.Get(id) == null)
+            var existingUser = await _userService.Get(id);
+
+            if (existingUser == null)
                 return NotFound(new { message = "User not found, unable to update" });
-            await _userService.Update(id, updatedUser);
+
+            // Only update the properties that are present in the DTO
+            if (updatedUserDTO.Username != null)
+            {
+                existingUser.Username = updatedUserDTO.Username;
+            }
+
+            // Update other properties if needed
+
+            await _userService.Update(id, existingUser);
+
             return NoContent();
         }
         catch (Exception ex)
@@ -56,6 +69,7 @@ public class UserController : ControllerBase
             return BadRequest(new { error = $"An error occurred while updating the user: {ex.Message}" });
         }
     }
+
 
     [HttpDelete("{id:length(24)}")]
     public async Task<IActionResult> DeleteUser(string id)

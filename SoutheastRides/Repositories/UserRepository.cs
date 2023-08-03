@@ -22,8 +22,22 @@ public async Task<IEnumerable<User>> Get() =>
         return user;
     }
 
-    public async Task Update(string id, User userIn) =>
-        await _users.ReplaceOneAsync(user => user.Id == id, userIn);
+    public async Task Update(string id, User userIn)
+    {
+        var filter = Builders<User>.Filter.Eq("Id", id);
+        var updateDefinition = Builders<User>.Update
+            .Set("Username", userIn.Username)
+            .Set("Email", userIn.Email)
+            .Set("ProfilePictureUrl", userIn.ProfilePictureUrl)
+            .Set("AuthProvider", userIn.AuthProvider)
+            .Set("AuthProviderId", userIn.AuthProviderId)
+            .Set("Bio", userIn.Bio)
+            .Set("RideHistory", userIn.RideHistory)
+            .Set("FavoriteRoutes", userIn.FavoriteRoutes);
+
+        await _users.UpdateOneAsync(filter, updateDefinition);
+    }
+
 
     public async Task Remove(User userIn) =>
         await _users.DeleteOneAsync(user => user.Id == userIn.Id);
