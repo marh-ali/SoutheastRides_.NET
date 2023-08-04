@@ -11,11 +11,11 @@ public class UserService : IUserService
 
     public async Task<User> Create(User user)
     {
+        if (user == null)
+            throw new ArgumentNullException(nameof(user), "The provided user data cannot be null.");
+
         try
         {
-            if (user == null)
-                throw new ArgumentNullException(nameof(user), "The provided user data cannot be null.");
-
             await _userRepository.Create(user);
             return user;
         }
@@ -24,6 +24,7 @@ public class UserService : IUserService
             throw new Exception($"An error occurred while creating the user: {ex.Message}");
         }
     }
+
 
     public async Task<User> Get(string id)
     {
