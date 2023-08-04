@@ -1,0 +1,18 @@
+﻿<Properties StartupConfiguration="{629E4DA2-80CE-4995-925A-DE00591E29F7}|Default">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MultiItemStartupConfigurations />
+  <MonoDevelop.Ide.Workbench>
+    <Pads>
+      <Pad Id="ProjectPad">
+        <State name="__root__">
+          <Node name="SoutheastRidesTests" expanded="True" selected="True" />
+        </State>
+      </Pad>
+    </Pads>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.ItemProperties.SoutheastRidesTests PreferredExecutionTarget="MonoDevelop.Default" />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+</Properties>
