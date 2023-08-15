@@ -5,12 +5,12 @@ public class UserRepository : IUserRepository
 {
     private readonly IMongoCollection<User> _users;
 
-    public UserRepository(SoutheastRidesContext context)
+    public UserRepository(ISoutheastRidesContext context)
     {
         _users = context.Users;
     }
 
-public async Task<IEnumerable<User>> Get() =>
+    public async Task<IEnumerable<User>> GetAll() =>
         await _users.Find(user => true).ToListAsync();
 
     public async Task<User> Get(string id) =>
@@ -29,18 +29,12 @@ public async Task<IEnumerable<User>> Get() =>
             .Set("Username", userIn.Username)
             .Set("Email", userIn.Email)
             .Set("ProfilePictureUrl", userIn.ProfilePictureUrl)
-            .Set("AuthProvider", userIn.AuthProvider)
-            .Set("AuthProviderId", userIn.AuthProviderId)
             .Set("Bio", userIn.Bio)
             .Set("RideHistory", userIn.RideHistory)
             .Set("FavoriteRoutes", userIn.FavoriteRoutes);
 
         await _users.UpdateOneAsync(filter, updateDefinition);
     }
-
-
-    public async Task Remove(User userIn) =>
-        await _users.DeleteOneAsync(user => user.Id == userIn.Id);
 
     public async Task Remove(string id) =>
         await _users.DeleteOneAsync(user => user.Id == id);

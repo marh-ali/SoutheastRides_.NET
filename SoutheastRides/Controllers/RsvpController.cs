@@ -1,9 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
-using SoutheastRides.DTO;
-using SoutheastRides.Models;
 using SoutheastRides.Services;
-using System;
-using System.Threading.Tasks;
+
 
 [ApiController]
 [Route("[controller]")]
@@ -18,15 +15,41 @@ public class RsvpController : ControllerBase
         _userService = userService;
     }
 
+
+    [HttpGet]
+    public async Task<ActionResult<IEnumerable<Rsvp>>> GetAllRsvps()
+    {
+        try
+        {
+            var rsvps = await _rsvpService.GetAllRsvps();
+            return Ok(rsvps);
+        }
+        catch (Exception ex)
+        {
+            return BadRequest(new { error = $"An error occurred while fetching all rsvps: {ex.Message}" });
+        }
+    }
+
+    [HttpGet("{id}", Name = "GetRsvp")]
+    public async Task<ActionResult<Rsvp>> GetRsvpById(string id)
+    {
+        try
+        {
+            var rsvp = await _rsvpService.GetRsvp(id);
+            return Ok(rsvp);
+        }
+        catch (Exception ex)
+        {
+            return BadRequest(new { error = $"An error occurred while fetching the RSVP: {ex.Message}" });
+        }
+    }
+
     [HttpPost]
     public async Task<ActionResult<Rsvp>> CreateRsvp(Rsvp newRsvp)
     {
         try
         {
-            var user = await _userService.Get(newRsvp.UserId);
-            if (user == null)
-                return BadRequest(new { message = "Invalid user ID. RSVP creation failed." });
-
+            var user = await _userService.GetUser(newRsvp.UserId);
             var rsvp = await _rsvpService.CreateRsvp(newRsvp);
             return CreatedAtRoute("GetRsvp", new { id = rsvp.Id.ToString() }, rsvp);
         }
@@ -36,30 +59,12 @@ public class RsvpController : ControllerBase
         }
     }
 
-    [HttpGet("{id:length(24)}", Name = "GetRsvp")]
-    public async Task<ActionResult<Rsvp>> GetRsvpById(string id)
-    {
-        try
-        {
-            var rsvp = await _rsvpService.GetRsvp(id);
-            if (rsvp == null) return NotFound(new { message = "RSVP not found" });
-            return rsvp;
-        }
-        catch (Exception ex)
-        {
-            return BadRequest(new { error = $"An error occurred while fetching the RSVP: {ex.Message}" });
-        }
-    }
-
-    [HttpPut("{id:length(24)}")]
-    public async Task<IActionResult> UpdateRsvp(string id, [FromBody] RsvpUpdateDTO updatedRsvpDTO)
+    [HttpPut("{id}")]
+    public async Task<ActionResult<Rsvp>> UpdateRsvp(string id, [FromBody] RsvpUpdateDTO updatedRsvpDTO)
     {
         try
         {
             var existingRsvp = await _rsvpService.GetRsvp(id);
-
-            if (existingRsvp == null)
-                return NotFound(new { message = "RSVP not found, unable to update" });
 
             if (updatedRsvpDTO.RsvpStatus != null)
                 existingRsvp.RsvpStatus = updatedRsvpDTO.RsvpStatus;
@@ -72,7 +77,7 @@ public class RsvpController : ControllerBase
 
             await _rsvpService.UpdateRsvp(id, existingRsvp);
 
-            return NoContent();
+            return Ok(existingRsvp);
         }
         catch (Exception ex)
         {
@@ -80,13 +85,12 @@ public class RsvpController : ControllerBase
         }
     }
 
-    [HttpDelete("{id:length(24)}")]
-    public async Task<IActionResult> DeleteRsvp(string id)
+    [HttpDelete("{id}")]
+    public async Task<ActionResult> DeleteRsvp(string id)
     {
         try
         {
             var rsvp = await _rsvpService.GetRsvp(id);
-            if (rsvp == null) return NotFound(new { message = "RSVP not found, unable to delete" });
             await _rsvpService.DeleteRsvp(rsvp.Id);
             return NoContent();
         }

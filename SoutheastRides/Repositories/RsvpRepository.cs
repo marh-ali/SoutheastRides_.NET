@@ -1,24 +1,23 @@
 using MongoDB.Driver;
-using System.Collections.Generic;
-using System.Threading.Tasks;
+
 
 public class RsvpRepository : IRsvpRepository
 {
     private readonly IMongoCollection<Rsvp> _rsvps;
 
-    public RsvpRepository(IMongoDatabase database)
+    public RsvpRepository(ISoutheastRidesContext context)
     {
-        _rsvps = database.GetCollection<Rsvp>("Rsvp");
-    }
-
-    public async Task<IEnumerable<Rsvp>> GetAll()
-    {
-        return await _rsvps.Find(rsvp => true).ToListAsync();
+        _rsvps = context.Rsvps;
     }
 
     public async Task<Rsvp> Get(string id)
     {
         return await _rsvps.Find<Rsvp>(rsvp => rsvp.Id == id).FirstOrDefaultAsync();
+    }
+
+    public async Task<IEnumerable<Rsvp>> GetAll()
+    {
+        return await _rsvps.Find(rsvp => true).ToListAsync();
     }
 
     public async Task<Rsvp> Create(Rsvp rsvp)

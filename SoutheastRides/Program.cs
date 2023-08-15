@@ -13,7 +13,7 @@ var client = new MongoClient(settings.ConnectionString);
 var database = client.GetDatabase(settings.DatabaseName);
 
 builder.Services.AddSingleton<IMongoDatabase>(database);
-builder.Services.AddScoped(sp =>
+builder.Services.AddScoped<ISoutheastRidesContext>(sp =>
     new SoutheastRidesContext(new MongoClient(settings.ConnectionString), settings.DatabaseName));
 
 builder.Services.AddScoped<IUserRepository, UserRepository>();

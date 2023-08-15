@@ -2,8 +2,9 @@
 
 public interface IUserService
 {
-    Task<User> Create(User user);
-    Task<User> Get(string id);
-    Task Update(string id, User userIn);
-    Task Remove(string id);
+    Task<IEnumerable<User>> GetAllUsers();
+    Task<User> CreateUser(User user);
+    Task<User> GetUser(string id);
+    Task UpdateUser(string id, User userIn);
+    Task DeleteUser(string id);
 }

@@ -26,6 +26,7 @@
 /Users/alimarhoon/Projects/SoutheastRides/SoutheastRidesTests/bin/Debug/net7.0/Microsoft.TestPlatform.Utilities.dll
 /Users/alimarhoon/Projects/SoutheastRides/SoutheastRidesTests/bin/Debug/net7.0/Microsoft.VisualStudio.TestPlatform.Common.dll
 /Users/alimarhoon/Projects/SoutheastRides/SoutheastRidesTests/bin/Debug/net7.0/testhost.dll
+/Users/alimarhoon/Projects/SoutheastRides/SoutheastRidesTests/bin/Debug/net7.0/Mongo2Go.dll
 /Users/alimarhoon/Projects/SoutheastRides/SoutheastRidesTests/bin/Debug/net7.0/MongoDB.Bson.dll
 /Users/alimarhoon/Projects/SoutheastRides/SoutheastRidesTests/bin/Debug/net7.0/MongoDB.Driver.dll
 /Users/alimarhoon/Projects/SoutheastRides/SoutheastRidesTests/bin/Debug/net7.0/MongoDB.Driver.Core.dll
